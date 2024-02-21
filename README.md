@@ -1,0 +1,1 @@
+Este es un ejemplo básico de clasificación de imagenes usando scikit-learn.
