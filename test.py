@@ -1,8 +1,19 @@
 """GitHub Classroom autograding script."""
 
-import os
+import pickle
 
-#
-# Retorna error si la carpeta output/ no existe
-if not os.path.exists("forecasts.csv"):
-    raise Exception("File 'forecasts.csv' not found")
+from sklearn import datasets
+from sklearn.metrics import accuracy_score
+
+digits = datasets.load_digits()
+data = digits.images.reshape((len(digits.images), -1))
+
+with open("estimator.pickle", "rb") as file:
+    new_clf = pickle.load(file)
+
+accuracy = accuracy_score(
+    y_true=digits.target,
+    y_pred=new_clf.predict(data),
+)
+
+assert accuracy > 0.96
